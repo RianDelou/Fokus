@@ -12,7 +12,6 @@ musica.loop = true;
 function eventoBotao(valor) {
     
     buttonList.forEach(conteudo => {
-        console.log(conteudo);
         conteudo.classList.remove("active");
     });
 
@@ -62,7 +61,7 @@ long.addEventListener("click", () => {
 });
 
 musicButton.addEventListener("change", () => {
-    if (musica.paused) {
+    if (musicButton.checked) {
         musica.play();
     } else {
         musica.pause();
