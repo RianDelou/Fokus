@@ -8,6 +8,10 @@ const buttonList =  document.querySelectorAll(".app__card-button");
 const musicButton = document.getElementById("alternar-musica");
 const musica = new Audio("sons/luna-rise-part-one.mp3");
 musica.loop = true;
+const startTimer = document.getElementById("start-pause");
+
+let tempo = 5;
+let intervalo = null;
 
 function eventoBotao(valor) {
     
@@ -48,6 +52,30 @@ function eventoBotao(valor) {
 
 }
 
+function decrementoTempo() {
+    if (tempo <= 0) {
+        zerar();
+        console.log("cabo");
+        return;
+    }
+
+    tempo -= 1;
+    console.log(tempo);
+}
+
+function timerInitOrPause() {
+    if (intervalo) {
+        zerar();
+        return;
+    }
+    intervalo = setInterval(decrementoTempo, 1000); // recebe em milissegundos
+}
+
+function zerar() {
+    clearInterval(intervalo);
+    intervalo = null;
+}
+
 foco.addEventListener("click", () => {
     eventoBotao("foco");
 });
@@ -61,9 +89,14 @@ long.addEventListener("click", () => {
 });
 
 musicButton.addEventListener("change", () => {
+    console.dir(musicButton)
     if (musicButton.checked) {
         musica.play();
     } else {
         musica.pause();
     }
 });
+
+startTimer.addEventListener("click", timerInitOrPause);
+
+
