@@ -8,7 +8,7 @@ const buttonList = document.querySelectorAll(".app__card-button");
 const musicButton = document.getElementById("alternar-musica");
 const buttonTimer = document.getElementById("start-pause");
 const buttonTimerText = document.querySelector("#start-pause span");
-const ButtonTimerImg = document.querySelector(".app__card-primary-butto-icon");
+const buttonTimerImg = document.querySelector(".app__card-primary-butto-icon");
 const timerPlace = document.getElementById("timer");
 
 const musicaPadrao = new Audio("sons/luna-rise-part-one.mp3");
@@ -65,7 +65,7 @@ function startOrPauseTimer() {
         return;
     } else {
         buttonTimerText.textContent = "Pausar";
-        ButtonTimerImg.setAttribute("src", "imagens/pause.png");
+        buttonTimerImg.setAttribute("src", "imagens/pause.png");
         musicList[0].play(); //play START
     }
 
@@ -84,7 +84,7 @@ function zerar() {
     clearInterval(intervaloValue);
     intervaloValue = null;
     buttonTimerText.textContent = "Começar";
-    ButtonTimerImg.setAttribute("src", "imagens/play_arrow.png");
+    buttonTimerImg.setAttribute("src", "imagens/play_arrow.png");
 }
 
 function timerAppear() {
