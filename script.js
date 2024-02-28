@@ -13,7 +13,7 @@ const timerPlace = document.getElementById("timer");
 
 const musicaPadrao = new Audio("sons/luna-rise-part-one.mp3");
 musicaPadrao.loop = true;
-const musicList = [new Audio("sons/play.wav"), new Audio("sons/pause.mp3"), new Audio("sons/beep.mp3")];
+const musicList = [new Audio("sons/play.wav"), new Audio("sons/pause.mp3"), new Audio("sons/beep.mp3")]; // lista de audios
 
 let tempo = 1500;
 let intervaloValue = null;
