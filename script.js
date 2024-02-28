@@ -26,7 +26,7 @@ function eventoBotao(valor) {
     });
 
     html.setAttribute("data-contexto", valor);
-    img.setAttribute("src", `/Imagens/${valor}.png`);
+    img.setAttribute("src", `imagens/${valor}.png`);
 
     switch (valor) {
         case "foco":
@@ -65,7 +65,7 @@ function startOrPauseTimer() {
         return;
     } else {
         buttonTimerText.textContent = "Pausar";
-        buttonTimerImg.setAttribute("src", "Imagens/pause.png");
+        buttonTimerImg.setAttribute("src", "imagens/pause.png");
         musicList[0].play(); //play START
     }
 
@@ -84,7 +84,7 @@ function zerar() {
     clearInterval(intervaloValue);
     intervaloValue = null;
     buttonTimerText.textContent = "Começar";
-    buttonTimerImg.setAttribute("src", "Imagens/play_arrow.png");
+    buttonTimerImg.setAttribute("src", "imagens/play_arrow.png");
 }
 
 function timerAppear() {
