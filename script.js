@@ -4,17 +4,18 @@ const short = document.querySelector(".app__card-button--curto");
 const long = document.querySelector(".app__card-button--longo");
 const img = document.querySelector(".app__image");
 const title = document.querySelector(".app__title");
-const buttonList =  document.querySelectorAll(".app__card-button");
+const buttonList = document.querySelectorAll(".app__card-button");
 const musicButton = document.getElementById("alternar-musica");
-const musica = new Audio("sons/luna-rise-part-one.mp3");
-musica.loop = true;
-const startTimer = document.getElementById("start-pause");
+const musicaPadrao = new Audio("sons/luna-rise-part-one.mp3");
+musicaPadrao.loop = true;
+const buttonStartOrPauseTimer = document.getElementById("start-pause");
+const musicList = [new Audio("sons/play.wav"), new Audio("sons/pause.mp3"), new Audio("sons/beep.mp3")];
 
 let tempo = 5;
-let intervalo = null;
+let intervaloValue = null;
 
 function eventoBotao(valor) {
-    
+
     buttonList.forEach(conteudo => {
         conteudo.classList.remove("active");
     });
@@ -35,7 +36,7 @@ function eventoBotao(valor) {
 
             title.innerHTML = `Que tal dar uma respirada?<br>
         <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
-     
+
             short.classList.add("active");
 
             break;
@@ -51,29 +52,28 @@ function eventoBotao(valor) {
     }
 
 }
+function startOrPauseTimer() {
 
-function decrementoTempo() {
-    if (tempo <= 0) {
-        zerar();
-        console.log("cabo");
+    if (intervaloValue) { //caso intervaloValue exista, não seja nulo
+        clearInterval(intervaloValue);
+        intervaloValue = null;
+
+        musicList[1].play(); //pause
         return;
+    } else {
+        musicList[0].play(); //play
     }
 
-    tempo -= 1;
-    console.log(tempo);
-}
-
-function timerInitOrPause() {
-    if (intervalo) {
-        zerar();
-        return;
-    }
-    intervalo = setInterval(decrementoTempo, 1000); // recebe em milissegundos
-}
-
-function zerar() {
-    clearInterval(intervalo);
-    intervalo = null;
+    intervaloValue = setInterval(() => {
+        if (tempo <= 0) {
+            clearInterval(intervaloValue);
+            console.log("temporizador finalizado");
+            musicList[2].play(); //beep beep
+            return;
+        }
+        console.log(tempo);
+        tempo -= 1;
+    }, 1000);
 }
 
 foco.addEventListener("click", () => {
@@ -89,14 +89,11 @@ long.addEventListener("click", () => {
 });
 
 musicButton.addEventListener("change", () => {
-    console.dir(musicButton)
     if (musicButton.checked) {
-        musica.play();
+        musicaPadrao.play();
     } else {
-        musica.pause();
+        musicaPadrao.pause();
     }
 });
 
-startTimer.addEventListener("click", timerInitOrPause);
-
-
+buttonStartOrPauseTimer.addEventListener("click", startOrPauseTimer);
